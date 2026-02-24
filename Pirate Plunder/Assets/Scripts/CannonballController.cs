@@ -10,6 +10,9 @@ public class CannonballController : MonoBehaviour
     [SerializeField] private GameObject debrisPrefab;
     [SerializeField] private Transform waterSplashSpawn;
     [SerializeField] private GameObject waterPrefab;
+    [SerializeField] private Transform textEffectSpawn;
+    [SerializeField] private GameObject missEffectPrefab;
+    [SerializeField] private GameObject hitEffectPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +67,9 @@ public class CannonballController : MonoBehaviour
 
         GameObject debris = Instantiate(debrisPrefab, debrisSpawn.position, Quaternion.identity);
         Destroy(debris, 5f);
+
+        GameObject hit = Instantiate(hitEffectPrefab, textEffectSpawn.position, Quaternion.identity);
+        Destroy(hit, 5f);
     }
 
     public IEnumerator SpawnWaterSplash()
@@ -74,5 +80,8 @@ public class CannonballController : MonoBehaviour
 
         GameObject water = Instantiate(waterPrefab, waterSplashSpawn.position, Quaternion.identity);
         Destroy(water, 5f);
+
+        GameObject miss = Instantiate(missEffectPrefab, textEffectSpawn.position, Quaternion.identity);
+        Destroy(miss, 5f);
     }
 }

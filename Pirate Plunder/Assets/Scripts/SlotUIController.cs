@@ -34,11 +34,11 @@ public class SlotUIController : MonoBehaviour
 
     public void SetTRTP(float rtp)
     {
-        trtpText.text = $"T-RTP: {rtp.ToString("0.00")}";
+        trtpText.text = $"T-RTP:{rtp.ToString("0.00")}";
     }
     public void SetARTP(float rtp)
     {
-        artpText.text = $"A-RTP: {rtp.ToString("0.00")}";
+        artpText.text = $"A-RTP:{rtp.ToString("0.00")}";
     }
 
     public void SetMinorPayoutTexts(SlotController.PayTableRow[] payTable, int mulitplier = 1)

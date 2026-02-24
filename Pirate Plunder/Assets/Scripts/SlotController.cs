@@ -154,7 +154,7 @@ public class SlotController : MonoBehaviour
         {
             cashAmount -= betAmount;
             actualSpentAmount += betAmount;
-            uiController.SetARTP((float)payoutAmount / actualSpentAmount);
+            uiController.SetARTP((float)payoutAmount / Mathf.Max(1, actualSpentAmount));
 
             uiController.SetCashText(cashAmount);
 
@@ -256,7 +256,9 @@ public class SlotController : MonoBehaviour
         print($"Type: {type}");
         payingOut = true;
 
-        switch(type)
+        uiController.SetARTP((float)(payoutAmount + payout) / Mathf.Max(1, actualSpentAmount));
+
+        switch (type)
         {
             case 0:
                 GameObject gold = Instantiate(goldLarge, normalGoldSpawn.position, Quaternion.identity);
@@ -307,8 +309,6 @@ public class SlotController : MonoBehaviour
 
         payoutAmount += payout;
         uiController.SetPayoutText(payoutAmount);
-
-        uiController.SetARTP((float)payoutAmount / actualSpentAmount);
 
         payingOut = false;
 
@@ -424,9 +424,10 @@ public class SlotController : MonoBehaviour
             yield return interval;
         }
 
+        actualSpentAmount = 0;
+        uiController.SetARTP(0.00f);
+
         Reset();
-
-
 
         cashingOut = false;
     }
@@ -436,6 +437,8 @@ public class SlotController : MonoBehaviour
         if (cashAmount >= betAmount && !spinningReels && !payingOut && !cashingOut && !fireMode && !addingCannonballs)
         {
             cashAmount -= betAmount;
+            actualSpentAmount += betAmount;
+            uiController.SetARTP((float)payoutAmount / Mathf.Max(1, actualSpentAmount));
             uiController.SetCashText(cashAmount);
 
             StartCoroutine(SpinReel(sevenPreset));
@@ -446,6 +449,8 @@ public class SlotController : MonoBehaviour
         if (cashAmount >= betAmount && !spinningReels && !payingOut && !cashingOut && !fireMode && !addingCannonballs)
         {
             cashAmount -= betAmount;
+            actualSpentAmount += betAmount;
+            uiController.SetARTP((float)payoutAmount / Mathf.Max(1, actualSpentAmount));
             uiController.SetCashText(cashAmount);
 
             StartCoroutine(SpinReel(barPreset));
@@ -456,6 +461,8 @@ public class SlotController : MonoBehaviour
         if (cashAmount >= betAmount && !spinningReels && !payingOut && !cashingOut && !fireMode && !addingCannonballs)
         {
             cashAmount -= betAmount;
+            actualSpentAmount += betAmount;
+            uiController.SetARTP((float)payoutAmount / Mathf.Max(1, actualSpentAmount));
             uiController.SetCashText(cashAmount);
 
             StartCoroutine(SpinReel(lemonPreset));
